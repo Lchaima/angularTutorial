@@ -14,6 +14,13 @@ export class CartService {
     this.items.push(product);
   }
 
+  removeProduct(productToRemove: Product) {
+    const index= this.items.findIndex(product => product === productToRemove)
+    if (index !== -1){
+      this.items.splice(index,1)
+    }
+  }
+
   getItems() {
     return this.items;
   }

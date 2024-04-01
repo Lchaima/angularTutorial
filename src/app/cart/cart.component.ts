@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CartService } from '../cart.service';
 import { FormBuilder } from '@angular/forms';
+import {Product} from "../products";
 
 @Component({
   selector: 'app-cart',
@@ -9,6 +10,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class CartComponent {
   items = this.cartService.getItems();
+  error : string = ''
 
   checkoutForm = this.formBuilder.group({
     name: '',
@@ -21,8 +23,17 @@ export class CartComponent {
   ) {}
 
   onSubmit(): void {
-    this.items = this.cartService.clearCart();
-    console.warn('Your order has been submitted', this.checkoutForm.value);
-    this.checkoutForm.reset();
+    if (this.items.length != 0){
+      this.items = this.cartService.clearCart();
+      window.alert("Your order has been submitted")
+      this.checkoutForm.reset();
+    }else{
+      this.error =" the cart is empty ! "
+    }
+  }
+
+  remove(product : Product) {
+    this.cartService.removeProduct(product);
+    console.warn('Your order has been removed');
   }
 }

@@ -14,27 +14,34 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CartComponent } from './cart/cart.component';
 
 import { ShippingComponent } from './shipping/shipping.component';
+import {NavbarComponent} from "./navbar/navbar.component";
+import {ProductsApiComponent} from "./products-api/products-api.component";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule.forRoot([
-      { path: '', component: ProductListComponent },
-      { path: 'products/:productId', component: ProductDetailsComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'shipping', component: ShippingComponent },
-    ]),
-  ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule.forRoot([
+            {path: '', component: ProductListComponent},
+            {path: 'search', component: ProductsApiComponent},
+            {path: 'products/:productId', component: ProductDetailsComponent},
+            {path: 'cart', component: CartComponent},
+            {path: 'shipping', component: ShippingComponent},
+        ]),
+        NgOptimizedImage,
+    ],
   declarations: [
     AppComponent,
     TopBarComponent,
+    NavbarComponent,
     ProductListComponent,
     ProductAlertsComponent,
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
+      ProductsApiComponent
   ],
   bootstrap: [AppComponent],
 })

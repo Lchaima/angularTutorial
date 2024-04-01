@@ -1,0 +1,16 @@
+<h3> Search </h3>
+<p> Look for products,Enter for example "Apple" </p>
+<div class="searchBar">
+    <input type="text" #searchText placeholder="Search...">
+    <button type="button" (click)="showProducts(searchText.value)"> search </button>
+</div>
+
+<div *ngFor="let product of products">
+    <div>
+        <h3> {{product.category}}</h3>
+        <p> {{product.name}}</p>
+        <div *ngIf="product.image">
+            <img [src]="product.image" width="200" height="150px">
+        </div>
+    </div>
+</div>
