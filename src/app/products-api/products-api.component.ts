@@ -1,5 +1,6 @@
-import { Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {ProductsService} from "../products.service";
+import {error} from "protractor";
 
 @Component({
   selector: 'app-products-api',
@@ -8,20 +9,27 @@ import {ProductsService} from "../products.service";
 })
 export class ProductsApiComponent {
 
-
-  constructor(private productsService : ProductsService){}
+    message: string ='' ;
+  constructor(private productsService : ProductsService){
+  }
 
   products : any[] = []
   showProducts(searchText :string){
+      this.message='Downloading'
     this.productsService.getExtrnalProducts(searchText)
-        .subscribe(data => {this.products= data.products.map((product:any)=> {
-          return {
-            name : product.name,
-            image : product.images[0],
-            category : product.categories[0].name
-          }
-            })
-        }
+        .subscribe((rep) => {
+                if (rep && rep.data) {
+                    this.products = rep.data.products.map((product: any) => {
+                        return {
+                            title: product.product_title,
+                            image: product.product_photo,
+                            rate: product.product_star_rating,
+                            price: product.product_price
+                        }
+                    });
+                    this.message = "";
+                }
+            }
         )
   }
 }

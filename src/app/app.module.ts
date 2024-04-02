@@ -17,6 +17,8 @@ import { ShippingComponent } from './shipping/shipping.component';
 import {NavbarComponent} from "./navbar/navbar.component";
 import {ProductsApiComponent} from "./products-api/products-api.component";
 import {NgOptimizedImage} from "@angular/common";
+import {MatGridListModule} from '@angular/material/grid-list';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
     imports: [
@@ -31,6 +33,7 @@ import {NgOptimizedImage} from "@angular/common";
             {path: 'shipping', component: ShippingComponent},
         ]),
         NgOptimizedImage,
+        MatGridListModule
     ],
   declarations: [
     AppComponent,
@@ -41,9 +44,13 @@ import {NgOptimizedImage} from "@angular/common";
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
-      ProductsApiComponent
+      ProductsApiComponent,
+
   ],
   bootstrap: [AppComponent],
+  providers: [
+    provideAnimationsAsync()
+  ],
 })
 export class AppModule {}
 
